@@ -1,0 +1,1 @@
+# jenkins-from-git-to-docker-registry
