@@ -1,0 +1,23 @@
+# docker-compose.yml
+version: '3.5'
+services:
+  my-jenkins:
+    container_name: my-jenkins
+    image: jenkins/jenkins:lts
+    privileged: true # has root powers
+    user: root
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - ./jenkins_data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - /etc/docker:/etc/docker
+    restart: always
+    networks:
+      main_bridge_network:
+
+networks: # network sections, here we can create or define an existing network
+  main_bridge_network: #define here a network
+    external: true # it means that we have already created this network

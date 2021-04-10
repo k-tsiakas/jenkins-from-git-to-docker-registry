@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+  my-registry.local:
+    container_name: my-registry.local
+    hostname: my-registry.local
+    image: registry:2
+    ports:
+    - 443:443
+    restart: always
+    env_file:
+      - registry.env
+    volumes:
+      - ./registry_data:/data
+      - ./auth:/auth
+      - ./certs:/certs
+    networks:
+      main_bridge_network:
+
+
+networks: # network sections, here we can create or define an existing network
+  main_bridge_network: #define here a network
+    external: true # it means that we have already created this network

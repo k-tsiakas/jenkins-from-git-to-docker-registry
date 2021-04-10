@@ -1,0 +1,20 @@
+version: '3.5'
+
+services:
+  docker-gui:
+    container_name: docker-gui
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    ports:
+      - 9000:9000
+      - 8000:8000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portainer_data:/data
+    networks:
+      main_bridge_network:
+
+networks: # network sections, here we can create or define an existing network
+  main_bridge_network: #define here a network
+    external: true # it means that we have already created this network
